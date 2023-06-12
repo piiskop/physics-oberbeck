@@ -1,0 +1,148 @@
+# Nurkkiirenduse ja jõumomendi sõltuvus raskuse langemisajast
+
+\onecolumn
+
+## Töö käik
+
+1. Kui veel polnud, siis kinnitasin katsevahendi igale harule pöörlemisteljest võrdsel kaugusel asuvad muhvid. Tagasin, et risthooratas oleks igas asendis tasakaalus.
+
+    ```{r label = "m_prime_0"}
+    m_prime_0 <- .0562
+  
+    ```
+
+2. Kinnitasin niidi otsa raskuse massiga \qty{`r as.character(m_prime_0)`}{\kg}.
+
+3. Kerisin niidi ühele rihmarattale, nii et raskus paiknes vahetult ülemise fotosilma kohal. Kontrollisin, et raskus langeks vabalt mõlemast fotoväravast läbi.
+
+4. Lülitasin seadme sisse.
+
+5. Vajutasin *Пуск*-nupule.
+
+6. Viisin raskuse algasendisse.
+
+7. Vajutasin *Сбрось*-nupule.
+
+8. Vajutasin *Пуск*-nupule.
+
+9. Vajutasin *Пуск*-nupule.
+
+10. Kandsin digitaalnäidiku ajalugemi tabelisse \@ref(tab:angular-acceleration-moment-of-inertia-by-time-of-falling) leheküljel `r render_pageref(reference = "tab:angular-acceleration-moment-of-inertia-by-time-of-falling")`.
+
+11. Kordasin samme \numrange{5}{9} kaks korda.
+
+12. Lisasin raskust.
+
+13. Kordasin samme \numrange{6}{12} kaks korda.
+
+14. Kordasin samme \numrange{6}{11}.
+
+15. Mõõtsin nihikuga rihmaratta raadiuse ja märkisin selle üles.
+
+    ```{r label = "r"}
+    r <- 2.0925e-3
+
+    ```
+
+    Rihmaratta raadius oli \qty{`r as.character(r)`}{\m}.
+    
+16. Mõõtsin fotoväravate vahelise vahemaa.
+
+    ```{r label = "height"}
+    h <- .362
+
+    ```
+
+    Fotoväravate vaheline vahemaa oli \qty{`r as.character(h)`}{\m}.
+    
+```{r label = "angular-acceleration-moment-of-inertia-by-time-of-falling"}
+m_prime <- c(m_prime_0, .1062, .1562, .2062, .2462)
+t_1 <- c(7.508, 4.452, 3.434, 2.978, 2.752)
+t_2 <- c(7.775, 4.515, 3.434, 2.978, 2.752)
+t_3 <- c(7.685, 4.47, 3.603, 2.992, 2.732)
+
+data_frame_of_mass_time <- data.frame(
+  seq(1:length(m_prime)),
+  m_prime,
+  t_1,
+  t_2,
+  t_3
+)
+
+mean_t <- rowMeans(data_frame_of_mass_time[, c(3:5)])
+data_frame_of_mass_time_with_mean_t <- cbind(data_frame_of_mass_time, mean_t)
+angular_acceleration <- 2 * h / (r * mean_t^2)
+data_frame_of_mass_time_with_angular_acceleration <- cbind(data_frame_of_mass_time_with_mean_t, angular_acceleration)
+torque <- m_prime * r * (g_Tallinn - r * angular_acceleration)
+data_frame_of_mass_time_with_torque <- cbind(data_frame_of_mass_time_with_angular_acceleration, torque)
+
+colnames(data_frame_of_mass_time_with_torque) <- c(
+  "Katse nr",
+  "$\\frac{m_\\text{hanging body}}{\\unit{\\kg}}$",
+  "$\\frac{t_1}{\\unit{\\s}}$",
+  "$\\frac{t_2}{\\unit{\\s}}$",
+  "$\\frac{t_3}{\\unit{\\s}}$",
+  "$\\frac{\\overline{t}}{\\unit{\\s}}$",
+  "$\\frac{\\omega}{\\unit{\\per\\s\\squared}}$",
+  "$\\frac{T}{\\unit{\\N\\m}}$"
+)
+
+print_table(
+  table = data_frame_of_mass_time_with_torque,
+  caption = "Nurkkiirenduse ja jõumomendi sõltuvus raskuse langemisajast.",
+  digits = 3,
+  additional_header = c(" " = 2, "Keha langemise aeg" = 4, " " = 2)
+)
+
+```
+
+## Andmeanalüüs
+
+Jõumomendi sõltuvus nurkkiirendusest on graafiliselt esitatud joonisel \@ref(fig:torque-vs-angular-speed) leheküljel `r render_pageref(reference = "fig:torque-vs-angular-speed")`.
+
+```{r label = "torque-vs-angular-speed", fig.cap = "Jõumomendi sõltuvus nurkkiirendusest."}
+librarian::shelf(c(
+  "ggplot2",
+  "ggpmisc",
+  "ggpubr",
+  "latex2exp"
+))
+
+color_x <- "#008000"                                                                                                                          
+color_y <- "#ff6600"                                                                                                                          
+if (!decimal_separator_period) { # for stat_regline_equation and stat_cor                                                                                                           # 8
+  options(OutDec = ".")                                                                                                                                                             # 9
+}                                                                                                                                                                                  # 10
+ggplot(
+  data = data_frame_of_mass_time_with_torque,
+  mapping = aes(x = `$\\frac{\\omega}{\\unit{\\per\\s\\squared}}$`, y = `$\\frac{T}{\\unit{\\N\\m}}$`)
+) +
+  geom_point(shape = 23, size = 1) +
+  labs(x = TeX("$\\frac{\\textit{\\omega}}{\\frac{1}{s^2}}$"), y = TeX("$\\frac{\\textit{T}}{N m}$")) +
+  theme(
+    axis.title.x = element_text(colour = color_x),
+    axis.text.x = element_text(colour = color_x),
+    axis.ticks.x = element_line(colour = color_x),
+    axis.title.y = element_text(colour = color_y),
+    axis.text.y = element_text(colour = color_y),
+    axis.ticks.y = element_line(colour = color_y)
+  ) +
+ stat_poly_line() +
+ #  stat_poly_eq(use_label(c("eq", "R2")))+
+  stat_regline_equation(mapping = aes(x = `$\\frac{\\omega}{\\unit{\\per\\s\\squared}}$`, y = `$\\frac{T}{\\unit{\\N\\m}}$`, label = paste(..eq.label.., ..rr.label.., ..adj.rr.label.., sep = "~~~~")), color = "#ff6600", label.y = .004) +  # 14
+  stat_cor(aes(x = `$\\frac{\\omega}{\\unit{\\per\\s\\squared}}$`, y = `$\\frac{T}{\\unit{\\N\\m}}$`), color = "#ff6600", label.y = .0035)                                                                                                    # 15
+
+if (!decimal_separator_period) {  # 1
+  options(OutDec = ",")           # 2
+}                                 # 3
+formula_1 = torque ~ angular_acceleration
+model_1 = lm(formula = formula_1, data = data_frame_of_mass_time_with_torque)
+emf_1 <- model_1$coefficients[1]
+r_1 <- -model_1$coefficients[2]
+
+print(emf_1)
+print(r_1)
+
+```
+
+\twocolumn

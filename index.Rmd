@@ -53,7 +53,7 @@ knitr::opts_chunk$set(
 )
 
 options(OutDec = ",")
-decimal_separator_period = TRUE # for stat_regline_equation and stat_cor
+decimal_separator_period = FALSE # for stat_regline_equation and stat_cor
 
 if (!require("librarian")) {
   install.packages("librarian", dependencies = TRUE)
@@ -229,5 +229,8 @@ render_color <- function(color, text) {
 
 ```
 
-# Introduction {-}
+# Eesmärgid
 
+1. Jäiga keha dünaamika põhivõrrandi kehtivus uuritud.
+
+2. Hooratta inertsimomendi määramise võimalus langeva raskuse abil, tundma õpitud.

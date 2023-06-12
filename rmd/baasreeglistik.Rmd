@@ -1,0 +1,621 @@
+# Baasreeglistik
+
+## Aeg ja selle talitlused
+
+### Aeg
+
+```{r label = "delta-nu-cs"}
+delta_nu_cs <- 9192631770
+
+```
+
+$\ce{^133Cs}$ aatomi häirimatu põhioleku hüperpeensiirdesageduse fikseeritud arvväärtus:
+
+```{=tex}
+\begin{align}
+\Delta(\nu_\text{Cs}) = 9 192 631 770 \frac{1}{\mathrm{s}}
+(\#eq:delta-nu-cs)
+\end{align}
+
+```
+
+[@bureau_1974_the(lk 130)].
+
+Avaldan avaldisest \@ref(eq:delta-nu-cs) sekundi:
+
+```{=tex}
+\begin{align}
+\mathrm{s} = \frac{9 192 631 770}{\Delta(\nu_\text{Cs})}
+(\#eq:second)
+\end{align}
+
+```
+
+Aja mõõtühik Système Internationale's on sekund.
+
+sekund
+: kestus 9 192 631 770 kiirgusperioodi, mis vastab $\ce{^133Cs}$ aatomi häirimatu põhiseisundi kahe ülipeene taseme vahelisele üleminekule
+
+\onecolumn
+
+### Vahemaa
+
+Valguse kiirus vaakumis:
+
+```{r label = "speed-of-light"}
+speed_of_light_in_vacuum <- 299792458
+delta_nu_cs_over_speed_of_light_in_vacuum_over <- delta_nu_cs / speed_of_light_in_vacuum
+reciprocal_of_speed_of_light_in_vacuum <- 1 / speed_of_light_in_vacuum
+
+```
+
+```{=tex}
+\begin{align}
+c = \qty{`r as.character(speed_of_light_in_vacuum)`}{\m\per\s}
+(\#eq:speed-of-light-in-vacuum)
+\end{align}
+
+```
+
+[@bureau_1974_the(lk 127)].
+
+Avaldan valguskiiruse vaakumis valemist \@ref(eq:speed-of-light-in-vacuum) leheküljel `r render_pageref(reference = "eq:speed-of-light-in-vacuum")` meetri ning asendan sekundi avaldisest \@ref(eq:second):
+
+```{=tex}
+\begin{align}
+\mathrm{m} = \frac{c \mathrm{s}}{`r speed_of_light_in_vacuum`} = \frac{c \times \frac{9 192 631 770}{\Delta(\nu_\text{Cs})}}{`r speed_of_light_in_vacuum`} = \frac{`r delta_nu_cs_over_speed_of_light_in_vacuum_over` \times c}{\Delta(\nu_\text{Cs})}.
+(\#eq:meter)
+\end{align}
+
+```
+
+Vahemaa mõõtühik Système Internationale's on meeter.
+
+meeter
+: vahemaa, mille valgus läbib vaakumis `r reciprocal_of_speed_of_light_in_vacuum` sekundi kestel
+
+Asukoha vektor
+
+```{=tex}
+\begin{align}
+\vec{r} := x \cdot \vec{i} + y \cdot \vec{j} + z \cdot \vec{k},
+(\#eq:r)
+\end{align}
+
+```
+
+kus
+
+$x$, $y$ ja $z$
+: Descartes'i ruumi koordinaadid [@haynes_2014_crc(lk 2-1)]
+
+Dimensionaalanalüüs on esitatud avaldises \@ref(eq:dimensional-analysis-for-r) leheküljel `r render_pageref(reference = "eq:dimensional-analysis-for-r")` ja sellest johtuvalt on ühik $\unit{\m}$.
+
+```{=tex}
+\begin{align}
+\mathrm{L}.
+(\#eq:dimensional-analysis-for-r)
+\end{align}
+
+```
+
+\twocolumn
+
+### Tasapinna nurk
+
+Tasapinna nurk on selle nurga haarade vahelise kaare ja haara pikkuse nurgast kaareni suhe (valem \@ref(eq:plane-angle) leheküljel `r render_pageref(reference = "eq:plane-angle")`[@haynes_2014_crc(lk 2-1)]).
+
+```{=tex}
+\begin{align}
+\alpha = \frac{s}{r},
+(\#eq:plane-angle)
+\end{align}
+
+```
+
+milles
+
+$s$
+: nurga haarade vahelise kaare pikkus
+
+$r$
+: nurga haara pikkus nurgast kaareni
+
+Dimensionaalanalüüs on esitatud avaldises \@ref(eq:dimensional-analysis-of-plane-angle) leheküljel `r render_pageref(reference = "eq:dimensional-analysis-of-plane-angle")` ja sellest johtuvalt on ühik \num{1} või  \unit{\radian}.
+
+```{=tex}
+\begin{align}
+\mathrm{\frac{L}{L}} = 1.
+(\#eq:dimensional-analysis-of-plane-angle)
+\end{align}
+
+```
+
+### Kiirus
+
+#### Vahemaa kiirus
+
+kiirus
+: vahemaa muutumise määr ajas [@haynes_2014_crc(lk 2-67)]
+
+Kiiruse vektor on väljendatud valemiga \@ref(eq:velocity) leheküljel `r render_pageref(reference = "eq:velocity")`[@haynes_2014_crc(lk 2-1)].
+
+```{=tex}
+\begin{align}
+\vec{v} = \frac{\mathrm{d}(\vec{r})}{\mathrm{d}(t)},
+(\#eq:velocity)
+\end{align}
+
+```
+
+Dimensionaalanalüüs on esitatud avaldisena  \@ref(eq:dimensional-analysis-for-velocity) leheküljel `r render_pageref(reference = "eq:dimensional-analysis-for-velocity")` ja sellest johtuvalt on ühik $\unit{\m\per\s}$.
+
+```{=tex}
+\begin{align}
+\mathrm{\frac{L}{T}}.
+(\#eq:dimensional-analysis-for-velocity)
+\end{align}
+
+```
+
+[]{#speed}
+
+Suunast sõltumatu kiirus on esitatud valemis \@ref(eq:speed) leheküljel `r render_pageref(reference = "eq:speed")`.
+
+```{=tex}
+\begin{align}
+v = |\vec{v}|.
+(\#eq:speed)
+\end{align}
+
+```
+
+#### Nurkkiirus
+
+nurkkiirus
+: nurk, mille võrra keha ajaühikus pöörleb[@haynes_2014_crc(lk 2-45)]
+
+Nurkkiiruse valem on \@ref(eq:angular-velocity) leheküljel `r render_pageref(reference = "eq:angular-velocity")`[@haynes_2014_crc(lk 2-1)].
+
+```{=tex}
+\begin{align}
+\omega = \frac{\mathrm{d}(\beta)}{\mathrm{d}(t)}.
+(\#eq:angular-velocity)
+\end{align}
+
+```
+
+Dimensionaalanalüüs on esitatud avaldisena \@ref(eq:dimensional-analysis-of-angular-velocity) leheküljel `r render_pageref(reference = "eq:dimensional-analysis-of-angular-velocity")` ja sellest johtuvalt on ühik \unit{\per\s} või \unit{\radian\per\s}.
+
+```{=tex}
+\begin{align}
+\frac{1}{\mathrm{T}}.
+(\#eq:dimensional-analysis-of-angular-velocity)
+\end{align}
+
+```
+
+Asendan nurkkiiruse valemisse \@ref(eq:angular-velocity) leheküljel `r render_pageref(reference = "eq:angular-velocity")` nurga valemi \@ref(eq:plane-angle) leheküljel `r render_pageref(reference = "eq:plane-angle")` ja seejärel kiiruse vektori ehk antud juhul tangentsiaalkiiruse valemi \@ref(eq:velocity) leheküljel `r render_pageref(reference = "eq:velocity")` ning saan nurkkiiruse arvutamise reegli tangentsiaalkiiruse ja raadiuse kaudu \@ref(eq:angular-velocity-by-tangential-velocity) leheküljel `r render_pageref(reference = "eq:angular-velocity-by-tangential-velocity")`.
+
+```{=tex}
+\begin{align}
+\omega = \frac{\mathrm{d}(\frac{s}{r})}{\mathrm{d}(t)} = \frac{\vec{v}}{r}.
+(\#eq:angular-velocity-by-tangential-velocity)
+\end{align}
+
+```
+
+\onecolumn
+
+### Kiirendus
+
+#### Vahemaa kiirendus
+
+kiirendus
+: kiiruse muutumise kiirus aja suhtes [@haynes_2014_crc(lk 2-44)]
+
+Kiirenduse vektori valem on \@ref(eq:a) leheküljel `r render_pageref(reference = "eq:a")`.
+
+```{=tex}
+\begin{align}
+\vec{a} := \frac{\mathrm{d}(\vec{v})}{\mathrm{d}(t)},
+(\#eq:a)
+\end{align}
+```
+
+kus
+
+$\vec{v}$
+: kiiruse vektor
+
+$t$
+: kestus [@haynes_2014_crc(lk 2-2)]
+
+Dimensionaalanalüüs on esitatud avaldisena \@ref(eq:dimensional-analysis-for-a) leheküljel `r render_pageref(reference = "eq:dimensional-analysis-for-a")`.
+
+```{=tex}
+\begin{align}
+\mathrm{\frac{\frac{L}{T}}{T} = \frac{L}{T^2}},
+(\#eq:dimensional-analysis-for-a)
+\end{align}
+```
+
+mistõttu ühik on $\unit{\m\per\s\squared}$.
+
+Joonisel \@ref(fig:cities) leheküljel `r render_pageref(reference = "fig:cities")` on näidatud gravitatsioonist põhjustatud kiirendus eri piirkondades Maal.
+
+(ref:caption-for-cities) Gravitatsioonist põhjustatud kiirendus eri Maa paigus[@elert_2019_glenn].
+
+```{r label = "cities", echo = FALSE, fig.cap = "(ref:caption-for-cities)", echo = FALSE, out.extra="angle = 90", out.width=".92\\textheight"}
+include_external_graphics("rmd/g.png")
+
+```
+
+```{r label = "g"}
+g <- 9.8
+g_Tallinn <- 9.82
+
+```
+
+\twocolumn
+
+#### Nurkkiirendus
+
+Nurkkiirenduse arvutamise valem on \@ref(eq:angular-acceleration) leheküljel `r render_pageref(reference = "eq:angular-acceleration")`[@giancoli_2014_physics(lk 201)].
+
+```{=tex}
+\begin{align}
+\alpha = \frac{\mathrm{d}(\omega)}{\mathrm{d}(t)}.
+(\#eq:angular-acceleration)
+\end{align}
+
+```
+
+Dimensionaalanalüüs on esitatud avaldisena \@ref(eq:dimensional-analysis-of-angular-acceleration) leheküljel `r render_pageref(reference = "eq:dimensional-analysis-of-angular-acceleration")` ja sellest johtuvalt on ühik \unit{\per\s\squared}.
+
+```{=tex}
+\begin{align}
+\mathrm{\frac{\frac{1}{T}}{T} = \frac{1}{T^2}}.
+(\#eq:dimensional-analysis-of-angular-acceleration)
+\end{align}
+
+```
+
+Kui asendan nurkkiirenduse põhivalemisse \@ref(eq:angular-acceleration) leheküljel `r render_pageref(reference = "eq:angular-acceleration")` nurkkiiruse selle valemist \@ref(eq:angular-velocity-by-tangential-velocity) leheküljel `r render_pageref(reference = "eq:angular-velocity-by-tangential-velocity")` tangentsiaalkiiruse kaudu ja tangentsiaalkiirenduse valemist \@ref(eq:a) leheküljel `r render_pageref(reference = "eq:a")`, saan nurkkiirenduse arvutamise reegli tangentsiaalkiiruse kaudu \@ref(eq:angular-acceleration-by-tangential-velocity) leheküljel `r render_pageref(reference = "eq:angular-acceleration-by-tangential-velocity")`
+
+```{=tex}
+\begin{align}
+\vec{\alpha} = \frac{\mathrm{d}(\frac{\vec{v}}{r})}{\mathrm{d}(t)} = \frac{\mathrm{d}(\vec{v})}{r \cdot \mathrm{d}(t)} = \frac{\vec{a}}{r}.
+(\#eq:angular-acceleration-by-tangential-velocity)
+\end{align}
+
+```
+
+### Jõnks
+
+jõnks
+: kiirenduse muut ajas[@thompson_snap(lk 2)] (avaldis \@ref(eq:jerk) leheküljel `r render_pageref(reference = "eq:jerk")`)
+
+```{=tex}
+\begin{align}
+w(t) = \frac{\frac{\frac{\mathrm{d}(r)}{\mathrm{d}(t)}}{\mathrm{d}(t)}}{\mathrm{d}(t)} = \frac{\frac{\mathrm{d}(v)}{\mathrm{d}(t)}}{\mathrm{d}(t)} = \frac{\mathrm{d}(a(t))}{\mathrm{d}(t)}
+(\#eq:jerk)
+\end{align}
+
+```
+
+Dimensionaalanalüüs on esitatud avaldises \@ref(eq:dimensional-analysis-of-jerk) leheküljel `r render_pageref(reference = "eq:dimensional-analysis-of-jerk")` ja sellest johtuvalt on ühik \unit{\m\per\s\cubed}.
+
+```{=tex}
+\begin{align}
+\mathrm{\frac{\frac{L}{T^2}}{T} = \frac{L}{T^3}}.
+(\#eq:dimensional-analysis-of-jerk)
+\end{align}
+
+```
+
+### Tuletused muutumatust jõnksust
+
+#### Kiirendus püsiva jõnksu kaudu
+
+Kiirenduse saab püsiva jõnksu kaudu avaldada integreerimise kaudu, nagu on näidatud seostes \@ref(eq:acceleration-by-jerk-with-integration-constants) leheküljel `r render_pageref(reference = "eq:acceleration-by-jerk-with-integration-constants")`[@a2016_38].
+
+```{=tex}
+\begin{align}
+\int{w(t)} \cdot \mathrm{d}(t) &= \int{\frac{\mathrm{d}(a(t))}{\mathrm{d}(t)}} \cdot \mathrm{d}(t),\\
+w(t) \cdot t + C &= a(t) + D,\\
+w(t) \cdot t + C - D &= a(t),
+(\#eq:acceleration-by-jerk-with-integration-constants)
+\end{align}
+
+```
+
+milles
+
+$C$, $D$
+: integreerimiskonstandid
+
+Näitan avaldises \@ref(eq:initial-acceleration) leheküljel `r render_pageref(reference = "eq:initial-acceleration")`, milline on kiirenduse funktsioon alghetkel.
+
+```{=tex}
+\begin{align}
+a(0) = w(0) \cdot 0 + C - D = C - D.
+(\#eq:initial-acceleration)
+\end{align}
+
+```
+
+Asendan algkiirenduse avaldisest \@ref(eq:initial-acceleration) leheküljel `r render_pageref(reference = "eq:initial-acceleration")` integreerimiskonstandid kiirenduse funktsiooni avaldisse \@ref(eq:acceleration-by-jerk-with-integration-constants) leheküljel `r render_pageref(reference = "eq:acceleration-by-jerk-with-integration-constants")` saades lõpliku kiirendusfunktsiooni \@ref(eq:acceleration-at-constant-jerk) leheküljel `r render_pageref(reference = "eq:acceleration-at-constant-jerk")` tingimusel, et jõnks on muutumatu.
+
+```{=tex}
+\begin{align}
+a(t) = w(t) \cdot t + a(0).
+(\#eq:acceleration-at-constant-jerk)
+\end{align}
+
+```
+
+\onecolumn
+
+#### Kiirus püsiva jõnksu kaudu
+
+Kiiruse saab püsiva jõnksu kaudu avaldada integreerimise kaudu, nagu on näidatud seostes \@ref(eq:speed-by-jerk) leheküljel `r render_pageref(reference = "eq:speed-by-jerk")` kasutades kiirenduse valemit kiiruse kaudu \@ref(eq:a) leheküljel `r render_pageref(reference = "eq:a")` ja kiirenduse valemit jõnksu kaudu \@ref(eq:acceleration-at-constant-jerk) leheküljel `r render_pageref(reference = "eq:acceleration-at-constant-jerk")`.
+
+```{=tex}
+\begin{align}
+\int{a(t)} \cdot \mathrm{d}(t) &= \int{\frac{\mathrm{d}(v(t))}{\mathrm{d}(t)}} \cdot \mathrm{d}(t),\\
+\int{w(t) \cdot t + a(0)} \cdot \mathrm{d}(t) &= \int{\frac{\mathrm{d}(v(t))}{\mathrm{d}(t)}} \cdot \mathrm{d}(t),\\
+\frac{w(t) \times t^2}{2} + a(0) \times t + C &= v(t) + D,\\
+\frac{w(t) \times t^2}{2} + a(0) \times t + v(0) &= v(t).
+(\#eq:speed-by-jerk)
+\end{align}
+
+```
+
+#### Vahemaa pikkus püsiva jõnksu kaudu
+
+Tee pikkuse saab püsiva jõnksu kaudu avaldada integreerimise kaudu, nagu on näidatud seostes \@ref(eq:path-length-by-jerk) leheküljel `r render_pageref(reference = "eq:path-length-by-jerk")` kasutades kiiruse valemit tee pikkuse kaudu \@ref(eq:velocity) leheküljel `r render_pageref(reference = "eq:velocity")` ja kiiruse valemit muutumatu jõnksu kaudu \@ref(eq:speed-by-jerk) leheküljel `r render_pageref(reference = "eq:speed-by-jerk")`.
+
+```{=tex}
+\begin{align}
+\int{v(t)} \cdot \mathrm{d}(t) &= \int{\frac{\mathrm{d}(r)}{\mathrm{d}(t)}} \cdot \mathrm{d}(t), \\
+\int{\frac{w(t) \times t^2}{2} + a(0) \times t + v(0)}  \times \mathrm{d}(t) &= \int{\frac{\mathrm{d}(r(t))}{\mathrm{d}(t)}} \times \mathrm{d}(t), \\
+\frac{w(t) \times t^3}{6} + \frac{a(0) \times t^2}{2} + v(0) \times t + C &= r(t) + D, \\
+\frac{w(t) \times t^3}{6} + \frac{a(0) \times t^2}{2} + v(0) \times t + r(0) &= r(t)
+(\#eq:path-length-by-jerk)
+\end{align}
+
+```
+
+[]{#mass}
+
+## Mass
+
+mass
+: aine kogus [@haynes_2014_crc(lk 2-58)]
+
+mass
+: vastupidavus kiirendusele
+
+Plancki konstant:
+
+```{r label = "planck-constant"}
+h <- 6.62607015e-34
+scalar_of_kg <- delta_nu_cs / h / delta_nu_cs_over_speed_of_light_in_vacuum_over^2
+
+```
+
+```{=tex}
+\begin{align}
+h = 6,626 070 15 \times 10^{-34} \mathrm{\frac{kg \times m^2}{s}}
+(\#eq:planck-constant)
+\end{align}
+
+```
+
+[@bureau_1974_the(lk 131)].
+
+Avaldan avaldisest \@ref(eq:planck-constant) leheküljel `r render_pageref(reference = "eq:planck-constant")` kilogrammi avaldisena \@ref(eq:kilogram) leheküljel `r render_pageref(reference = "eq:kilogram")`.
+
+```{=tex}
+\begin{align}
+\mathrm{kg} &= \frac{h}{\num{`r as.character(h)`}} \unit{\s\per\meter\squared} = \frac{h}{\num{`r as.character(h)`}} \times \frac{\frac{9 192 631 770}{\Delta(\nu_\text{Cs})}}{(\frac{`r delta_nu_cs_over_speed_of_light_in_vacuum_over` \times c}{\Delta(\nu_\text{Cs})})^2} \\
+&= `r scalar_of_kg` \times \frac{h \times \Delta(\nu_\text{Cs})}{c^2}.
+(\#eq:kilogram)
+\end{align}
+
+```
+
+\twocolumn
+
+[]{#momentum}
+
+## Impulss
+
+impulss
+: [massi](#mass) ja [kiiruse](#speed) korrutis[@haynes_2014_crc(lk 2-59)] (avaldis \@ref(eq:momentum) leheküljel `r render_pageref(reference = "eq:momentum")`)
+
+```{=tex}
+\begin{align}
+\vec{p} = m \cdot \vec{v}.
+(\#eq:momentum)
+\end{align}
+
+```
+
+Dimensioonanalüüs impulsi valemile on esitatud avaldisena \@ref(eq:dimensional-analysis-for-momentum) leheküljel `r render_pageref(reference = "eq:dimensional-analysis-for-momentum")` ja sellest johtuvalt on ühik \unit{\kg\m\per\s}.
+
+```{=tex}
+\begin{align}
+\mathrm{M \cdot \frac{L}{T}}.
+(\#eq:dimensional-analysis-for-momentum)
+\end{align}
+
+```
+
+## Inertsimoment
+
+keha inertsimoment telje suhtes
+: keha massielementide ja nende kauguste teljest ruutude korrutis (või integraal)[@haynes_2014_crc(lk 2-59)]
+
+Inertsimomendi valem on \@ref(eq:moment-of-inertia) leheküljel `r render_pageref(reference = "eq:moment-of-inertia")`.
+
+```{=tex}
+\begin{align}
+I = \sum{m \times r^2}.
+(\#eq:moment-of-inertia)
+\end{align}
+
+```
+
+Dimensioonanalüüs inertsimomendi valemile on esitatud avaldisena \@ref(eq:dimensional-analysis-of-moment-of-inertia) leheküljel `r render_pageref(reference = "eq:dimensional-analysis-of-moment-of-inertia")` ja sellest johtuvalt on ühik \unit{\kg\m\squared}.
+
+```{=tex}
+\begin{align}
+\mathrm{M \times L^2}.
+(\#eq:dimensional-analysis-of-moment-of-inertia)
+\end{align}
+
+```
+
+## Jõud
+
+Jõud on [impulsi](#momentum) muut ajas (avaldis \@ref(eq:force) leheküljel `r render_pageref(reference = "eq:force")`).
+
+```{=tex}
+\begin{align}
+\vec{F} = \frac{\mathrm{d}(\vec{p})}{\mathrm{d}(t)} = m frac{\cdot \mathrm{d}(\vec{v})}{\mathrm{d}(t)} = m \cdot \vec{a},
+(\#eq:force)
+\end{align}
+
+```
+
+kus *m* on mass ja $\vec{a}$ on kiirenduse vektor [@haynes_2014_crc(lk 2-2)]. Impulsi dimensionaalanalüüs on esitatud avaldisena \@ref(eq:dimensional-analysis-for-force) leheküljel `r render_pageref(reference = "eq:dimensional-analysis-for-force")` ja sellest johtuvalt on ühik $\unit{\m\kg\per\s\squared}$ või lühemalt $\unit{\N}$.
+
+```{=tex}
+\begin{align}
+\mathrm{M \times \frac{L}{T^2} = \frac{L \times M}{T^2}}.
+(\#eq:dimensional-analysis-for-force)
+\end{align}
+```
+
+## Jõumoment
+
+Jõumomendi valem on \@ref(eq:torque) leheküljel `r render_pageref(reference = "eq:torque")`[@haynes_2014_crc(lk 2-2)].
+
+```{=tex}
+\begin{align}
+\vec{T} = \vec{r} \times \vec{F},
+(\#eq:torque)
+\end{align}
+
+```
+
+milles
+
+$\vec{F}$
+: väändeliikumist tekitav jõud
+
+$\vec{r}$
+: vektor mõnest võrdluspunktist jõu rakenduspunktini[@haynes_2014_crc(lk 2-66)]
+
+Dimensionaalanalüüs on esitatud avaldisena \@ref(eq:dimensional-analysis-of-torque) leheküljel `r render_pageref(reference = "eq:dimensional-analysis-of-torque")` ja sellest johtuvalt on ühik \unit{\m\squared\kg\per\s\squared} või lühemalt \unit{\N\m}.
+
+```{=tex}
+\begin{align}
+\mathrm{L \times \frac{L \times M}{T^2} = \frac{L^2 \times M}{T^2}}.
+(\#eq:dimensional-analysis-of-torque)
+\end{align}
+
+```
+
+## Energia
+
+### Potentsiaalne energia
+
+potentsiaalne energia
+: süsteemi energia osa, mis on seotud selle asukohaga jõuväljas[@haynes_2014_crc(lk 2-62)] (valem \@ref(eq:potential-energy) leheküljel `r render_pageref(reference = "eq:potential-energy")`[@haynes_2014_crc(lk 2-2)]).
+
+```{=latex}
+\begin{align}
+E_\mathrm{p} = \int{\vec{F}} \cdot \mathrm{d}(s),(\#eq:potential-energy) 
+\end{align}
+
+```
+
+milles
+
+*s*
+: tee pikkus[@haynes_2014_crc(lk 2-1)]
+
+Dimensionaalanalüüs on esitatud avaldisena \@ref(eq:dimensional-analysis-of-potential-energy) leheküljel `r render_pageref(reference = "eq:dimensional-analysis-of-potential-energy")`.
+
+```{=tex}
+\begin{align}
+\mathrm{\frac{L \cdot M}{T^2} \cdot L = \frac{L^2 \cdot M}{T^2}}.
+(\#eq:dimensional-analysis-of-potential-energy)
+\end{align}
+
+```
+
+Seetõttu ühik on $\unit{\m\squared\kg\per\second\squared}$ või lühemalt $\unit{\m\N}$ või kõige lühemalt $\unit{\J}$.
+
+### Kineetiline energia
+
+kineetiline energia
+: energia, mis on seotud osakeste süsteemi liikumisega kindlaksmääratud võrdlusraamis[@haynes_2014_crc, p. 2-57]
+
+Ühe osakese [massiga *m*](#mass), mis liigub [kiirusega *v*](#speed), kineetiline energia on avaldatav valemiga \@ref(eq:kinetic-energy) leheküljel `r render_pageref(reference = "eq:kinetic-energy")`[@haynes_2014_crc, p. 2-2].
+
+```{=tex}
+\begin{align}
+E_\mathrm{k} = \frac{m \cdot v^2}{2}
+(\#eq:kinetic-energy)
+\end{align}
+
+```
+
+Dimensionaalanalüüs on esitatud avaldisena \@ref(eq:dimensional-analysis-of-kinetic-energy) leheküljel `r render_pageref(reference = "eq:dimensional-analysis-of-kinetic-energy")` ja sellest johtuvalt on ühik \unit{\kg\m\squared\per\second\squared}.
+
+```{=tex}
+\begin{align}
+\mathrm{M \times \frac{L}{T}^2 = \frac{M \times L^2}{T^2}}.
+(\#eq:dimensional-analysis-of-kinetic-energy)
+\end{align}
+
+```
+
+[]{#conservation-of-mechanical-energy}
+
+### Mehaanilise energia jäävus
+
+Kogu mehaaniline energia on kineetilise ja potentsiaalse energia summa igal hetkel[@giancoli_2014_physics(lk 150)] (valem \@ref(eq:total-mechanical-energy) leheküljel `r render_pageref(reference = "eq:total-mechanical-energy")`).
+
+```{=tex}
+\begin{align}
+E = E_\mathrm{k} + E_\mathrm{p}.
+(\#eq:total-mechanical-energy)
+\end{align}
+
+```
+
+mehaanilise energia jäävuse seadus
+: kogu mehaaniline energia jääb konstantseks seni, kuni ükski mittekonstantne jõud ei mõju
+
+Mehaanilise energia jäävuse seadus on väljendatud avaldises \@ref(eq:conservation-of-mechanical-energy) leheküljel `r render_pageref(reference = "eq:conservation-of-mechanical-energy")`, milles on lahti kirjutatud kogu mehaaniline energia avaldisest \@ref(eq:total-mechanical-energy) leheküljel `r render_pageref(reference = "eq:total-mechanical-energy")`.
+
+```{=tex}
+\begin{align}
+E_j = E_i = \mathrm{constant} = E_\mathrm{k}(i) + E_\mathrm{p}(i) = E_\mathrm{k}(j) + E_\mathrm{p}(j),
+(\#eq:conservation-of-mechanical-energy)
+\end{align}
+
+```
+
+milles
+
+*i*
+: varasem ajahetk
+
+*j*
+: hilisem ajahetk

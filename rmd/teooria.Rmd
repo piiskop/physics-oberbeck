@@ -1,0 +1,74 @@
+# Teooria
+
+Oberbecki pendel on agregaat, mis koosneb kahest rattast, nendele kinnitatud raskustest, niidist ning fotoväravate ja rattaga postist. Ühe ratta ümber saab keerata niidi, mille teise otsa kinnitatakse raskus, mis riputatakse ülemise fotovärava kohal olevast rattast üle, nii et see saaks vabalt langeda läbi kummagi fotovärava kerides niiti ratta ümbert vähemaks. Raskused ratta küljes tasakaalustavad ratast.
+
+Joonisel \@ref(fig:pendulum-body-falling) leheküljel `r render_pageref(reference = "fig:pendulum-body-falling")` on näidatud, et vahemaa niidi otsas rippuva raskuse massikeskme algse asukoha ja lõppasukoha vahel pendlikeha püstiselt langedes on sama mis ratta serval, mille ümber on niit keritud oleva punkti alg- ja lõppasukoha vahel selle ratta massikeskme suhtes ratta pööreldes, sest niit on kinnitatud ratta külge. Kuna need vahemaad on võrdsed ja ka ajavahemik, mille kestel massikese langeb või servapunkt oma lõplikku asukohta keha kõige madalamas asukohas jõuab, on sama, siis vastavalt kiiruse valemile \@ref(eq:velocity) leheküljel `r render_pageref(reference = "eq:velocity")` on pendlikeha massikeskme lineaarse püstise liikumise lõppkiirus sama mis selle pendlikeha lõplik tangentsiaalkiirus. Sama kehtib vastavate kiirenduste kohta.
+    
+```{r label = "pendulum-body-falling", echo=FALSE, fig.cap = "Jämeda punase osa pikkus ümber ratta on sama suur kui vertikaalse punktiirjoone ehk niidi osa pikkus."}
+include_external_graphics("rmd/ratta-ümbermõõt-niidi-pikkus.svg")
+
+```
+
+Kasutades tee pikkuse valemit muutumatu jõnksu korral \@ref(eq:path-length-by-jerk) leheküljel `r render_pageref(reference = "eq:path-length-by-jerk")`, tuletan lineaarse püstise langemise korral gravitatsioonist põhjustatud kiirenduse saades avaldise \@ref(eq:g) leheküljel `r render_pageref(reference = "eq:g")`.
+
+```{=tex}
+\begin{align}
+h &= \frac{0 \times t^3}{6} + \frac{g \times t^2}{2} + 0 \times t + 0,\\
+\frac{g \times t^2}{2} &= h,\\
+g &= \frac{2 \times h}{t^2}.
+(\#eq:g)
+\end{align}
+
+```
+
+Kasutades kiiruse valemit muutumatu jõnksu korral \@ref(eq:speed-by-jerk) leheküljel `r render_pageref(reference = "eq:speed-by-jerk")`, tuletan lõppkiiruse valemi püstise langemise puhul saades avaldise \@ref(eq:final-speed) leheküljel `r render_pageref(reference = "eq:final-speed")`, millesse asendan gravitatsioonist põhjustatud kiirenduse valemist \@ref(eq:g) leheküljel `r render_pageref(reference = "eq:g")`.
+
+```{=tex}
+\begin{align}
+v = \frac{0 \times t^2}{2} + g \times t + 0 = \frac{2 \times h}{t}.
+(\#eq:final-speed)
+\end{align}
+
+```
+
+Kuna nimetatud lineaarne ja tangentsiaalkiirus on võrdsed, siis saan avaldada nurkkiirenduse kasutades selle valemit tangentsiaalkiiruse järgi \@ref(eq:angular-acceleration-by-tangential-velocity) leheküljel `r render_pageref(reference = "eq:angular-acceleration-by-tangential-velocity")` ja asendades sellesse kiiruse valemist \@ref(eq:final-speed) leheküljel `r render_pageref(reference = "eq:final-speed")`, saades avaldise \@ref(eq:final-angular-acceleration) leheküljel `r render_pageref(reference = "eq:final-angular-acceleration")`.
+
+```{=tex}
+\begin{align}
+\alpha = \frac{\mathrm{d}(\frac{2 \times h}{t})}{r \cdot \mathrm{d}(t)} = \frac{2 \times h}{r \times t^2}.
+(\#eq:final-angular-acceleration)
+\end{align}
+
+```
+
+Rippuvale kehale mõjuvad gravitatsiooni- ja niidi elastsusjõud mõõdustavad kogujõu, millest avaldan seostes \@ref(eq:elastic-force) leheküljel `r render_pageref(reference = "eq:elastic-force")` elastsusjõu. Kogu- ja gravitatsioonijõu jaoks kasutan jõu valemit \@ref(eq:force) leheküljel `r render_pageref(reference = "eq:force")`. Tangentsiaalkiirenduse asendan nurkkiiruse valemist \@ref(eq:angular-acceleration-by-tangential-velocity) leheküljel `r render_pageref(reference = "eq:angular-acceleration-by-tangential-velocity")`.
+
+```{=tex}
+\begin{align}
+\vec{F} &= \vec{F_\text{G}} + \vec{F_\text{elastic}},\\
+F &= F_\text{G} - F_\text{elastic},\\
+m_\text{hanging body} \cdot a &= m_\text{hanging body} \cdot g - F_\text{elastic},\\
+F_\text{elastic} &= m_\text{hanging body} \cdot g - m_\text{hanging body} \cdot a = m_\text{hanging body} \cdot (g - a) =\\
+&m_\text{hanging body} \cdot (g - r \cdot \alpha),
+(\#eq:elastic-force)
+\end{align}
+
+```
+
+milles
+
+$\vec{F_\text{G}}$
+: gravitatsioonijõud[@giancoli_2014_physics(lk 84)]
+
+$m_\text{hanging body}$
+: rippuva keha mass
+
+Jõud, mis mõjub hoorattale selle raadiusega risti, on piki niiti kulgev niidi elastsusjõud, mille asendan valemist \@ref(eq:elastic-force) leheküljel `r render_pageref(reference = "eq:elastic-force")` jõumomendi valemisse \@ref(eq:torque) leheküljel `r render_pageref(reference = "eq:torque")`, et saada hoorattale mõjuva jõumomendi arvutamise valem \@ref(eq:torque-on-wheel) leheküljel `r render_pageref(reference = "eq:torque-on-wheel")`.
+
+```{=tex}
+\begin{align}
+T = r \cdot m_\text{hanging body} \cdot (g - r \cdot \alpha).
+(\#eq:torque-on-wheel)
+\end{align}
+
+```
