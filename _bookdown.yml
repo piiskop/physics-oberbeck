@@ -7,5 +7,7 @@ rmd_files: [
   "rmd/baasreeglistik.Rmd",
   "rmd/teooria.Rmd",
   "rmd/töökäik.Rmd",
+  "rmd/analüüs.Rmd",
+  "rmd/vastused.Rmd",
   "references.Rmd"
 ]

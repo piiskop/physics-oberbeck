@@ -529,93 +529,14 @@ Dimensionaalanalüüs on esitatud avaldisena \@ref(eq:dimensional-analysis-of-to
 
 ```
 
-## Energia
-
-### Potentsiaalne energia
-
-potentsiaalne energia
-: süsteemi energia osa, mis on seotud selle asukohaga jõuväljas[@haynes_2014_crc(lk 2-62)] (valem \@ref(eq:potential-energy) leheküljel `r render_pageref(reference = "eq:potential-energy")`[@haynes_2014_crc(lk 2-2)]).
-
-```{=latex}
-\begin{align}
-E_\mathrm{p} = \int{\vec{F}} \cdot \mathrm{d}(s),(\#eq:potential-energy) 
-\end{align}
-
-```
-
-milles
-
-*s*
-: tee pikkus[@haynes_2014_crc(lk 2-1)]
-
-Dimensionaalanalüüs on esitatud avaldisena \@ref(eq:dimensional-analysis-of-potential-energy) leheküljel `r render_pageref(reference = "eq:dimensional-analysis-of-potential-energy")`.
+Et väljendada jõumoment inertsimomendi ja nurkkiirenduse kaudu, asendan jõumomendi põhivalemisse \@ref(eq:torque) leheküljel `r render_pageref(reference = "eq:torque")` pöördkehale mõjuva jõu valemist \@ref(eq:force) leheküljel `r render_pageref(reference = "eq:force")`, seejärel tangentsiaalkiirenduse nurkkiirenduse valemist \@ref(eq:angular-acceleration-by-tangential-velocity) leheküljel `r render_pageref(reference = "eq:angular-acceleration-by-tangential-velocity")` ja lõpuks inertsimomendi valemist \@ref(eq:moment-of-inertia) leheküljel `r render_pageref(reference = "eq:moment-of-inertia")`, et saada valem \@ref(eq:torque-by-moment-of-inertia) leheküljel `r render_pageref(reference = "eq:torque-by-moment-of-inertia")`.
 
 ```{=tex}
 \begin{align}
-\mathrm{\frac{L \cdot M}{T^2} \cdot L = \frac{L^2 \cdot M}{T^2}}.
-(\#eq:dimensional-analysis-of-potential-energy)
+\vec{T} = \vec{r} \times \vec{m \cdot \vec{a}} = m \cdot \vec{a} \times \vec{r} = \\
+m \cdot \vec{r \cdot \vec{\alpha}} \times \vec{r} = m \cdot r \cdot \vec{r} \times \vec{\alpha} =\\
+m \cdot \vec{r^2} \times \vec{\alpha} = \vec{I} \times \vec{\alpha}.
+(\#eq:torque-by-moment-of-inertia)
 \end{align}
 
 ```
-
-Seetõttu ühik on $\unit{\m\squared\kg\per\second\squared}$ või lühemalt $\unit{\m\N}$ või kõige lühemalt $\unit{\J}$.
-
-### Kineetiline energia
-
-kineetiline energia
-: energia, mis on seotud osakeste süsteemi liikumisega kindlaksmääratud võrdlusraamis[@haynes_2014_crc, p. 2-57]
-
-Ühe osakese [massiga *m*](#mass), mis liigub [kiirusega *v*](#speed), kineetiline energia on avaldatav valemiga \@ref(eq:kinetic-energy) leheküljel `r render_pageref(reference = "eq:kinetic-energy")`[@haynes_2014_crc, p. 2-2].
-
-```{=tex}
-\begin{align}
-E_\mathrm{k} = \frac{m \cdot v^2}{2}
-(\#eq:kinetic-energy)
-\end{align}
-
-```
-
-Dimensionaalanalüüs on esitatud avaldisena \@ref(eq:dimensional-analysis-of-kinetic-energy) leheküljel `r render_pageref(reference = "eq:dimensional-analysis-of-kinetic-energy")` ja sellest johtuvalt on ühik \unit{\kg\m\squared\per\second\squared}.
-
-```{=tex}
-\begin{align}
-\mathrm{M \times \frac{L}{T}^2 = \frac{M \times L^2}{T^2}}.
-(\#eq:dimensional-analysis-of-kinetic-energy)
-\end{align}
-
-```
-
-[]{#conservation-of-mechanical-energy}
-
-### Mehaanilise energia jäävus
-
-Kogu mehaaniline energia on kineetilise ja potentsiaalse energia summa igal hetkel[@giancoli_2014_physics(lk 150)] (valem \@ref(eq:total-mechanical-energy) leheküljel `r render_pageref(reference = "eq:total-mechanical-energy")`).
-
-```{=tex}
-\begin{align}
-E = E_\mathrm{k} + E_\mathrm{p}.
-(\#eq:total-mechanical-energy)
-\end{align}
-
-```
-
-mehaanilise energia jäävuse seadus
-: kogu mehaaniline energia jääb konstantseks seni, kuni ükski mittekonstantne jõud ei mõju
-
-Mehaanilise energia jäävuse seadus on väljendatud avaldises \@ref(eq:conservation-of-mechanical-energy) leheküljel `r render_pageref(reference = "eq:conservation-of-mechanical-energy")`, milles on lahti kirjutatud kogu mehaaniline energia avaldisest \@ref(eq:total-mechanical-energy) leheküljel `r render_pageref(reference = "eq:total-mechanical-energy")`.
-
-```{=tex}
-\begin{align}
-E_j = E_i = \mathrm{constant} = E_\mathrm{k}(i) + E_\mathrm{p}(i) = E_\mathrm{k}(j) + E_\mathrm{p}(j),
-(\#eq:conservation-of-mechanical-energy)
-\end{align}
-
-```
-
-milles
-
-*i*
-: varasem ajahetk
-
-*j*
-: hilisem ajahetk

@@ -1,10 +1,8 @@
-# Nurkkiirenduse ja jõumomendi sõltuvus raskuse langemisajast
-
 \onecolumn
 
-## Töö käik
+# Töö käik
 
-1. Kui veel polnud, siis kinnitasin katsevahendi igale harule pöörlemisteljest võrdsel kaugusel asuvad muhvid. Tagasin, et risthooratas oleks igas asendis tasakaalus.
+1. Tagasin, et risthooratas oleks igas asendis tasakaalus.
 
     ```{r label = "m_prime_0"}
     m_prime_0 <- .0562
@@ -29,7 +27,7 @@
 
 10. Kandsin digitaalnäidiku ajalugemi tabelisse \@ref(tab:angular-acceleration-moment-of-inertia-by-time-of-falling) leheküljel `r render_pageref(reference = "tab:angular-acceleration-moment-of-inertia-by-time-of-falling")`.
 
-11. Kordasin samme \numrange{5}{9} kaks korda.
+11. Kordasin samme \numrange{3}{9} kaks korda.
 
 12. Lisasin raskust.
 
@@ -55,6 +53,24 @@
 
     Fotoväravate vaheline vahemaa oli \qty{`r as.character(h)`}{\m}.
     
+18. Mõõtsin, millised on muhvide kaugused.
+
+    ```{r label = "R-min"}
+    R_min <- 7.9e-2
+    
+    ```
+    
+    Muhvid olid nihutatud minimaalsele kaugusele hooratta keskpunktist ja see kaugus oli \qty{`r as.character(R_min)`}{\m}.
+    
+19. Nihutasin muhvid maksimaalsele kaugusele pöörlemisteljest ja mõõtsin nende kauguse pöörlemisteljest.
+    
+    ```{r label = "R-max"}
+    R_max <- 2.48e-1
+
+    ```
+
+20. Kordasin samme \numrange{3}{9} ja täitsin vastavalt tabeli \@ref(tab:angular-acceleration-moment-of-inertia-by-distance) leheküljel `r render_pageref(reference = "tab:angular-acceleration-moment-of-inertia-by-distance")`.
+
 ```{r label = "angular-acceleration-moment-of-inertia-by-time-of-falling"}
 m_prime <- c(m_prime_0, .1062, .1562, .2062, .2462)
 t_1 <- c(7.508, 4.452, 3.434, 2.978, 2.752)
@@ -96,52 +112,48 @@ print_table(
 
 ```
 
-## Andmeanalüüs
+```{r label = "angular-acceleration-moment-of-inertia-by-distance"}
+R <- c(R_min, R_max)
 
-Jõumomendi sõltuvus nurkkiirendusest on graafiliselt esitatud joonisel \@ref(fig:torque-vs-angular-speed) leheküljel `r render_pageref(reference = "fig:torque-vs-angular-speed")`.
+t_1_by_distance <- c(t_1[length(t_1)], 5.917)
+t_2_by_distance <- c(t_2[length(t_2)], 6.013)
+t_3_by_distance <- c(t_3[length(t_3)], 5.865)
 
-```{r label = "torque-vs-angular-speed", fig.cap = "Jõumomendi sõltuvus nurkkiirendusest."}
-librarian::shelf(c(
-  "ggplot2",
-  "ggpmisc",
-  "ggpubr",
-  "latex2exp"
-))
+data_frame_of_mass_time_by_distance <- data.frame(
+  seq(1:length(R)),
+  R,
+  t_1_by_distance,
+  t_2_by_distance,
+  t_3_by_distance
+)
 
-color_x <- "#008000"                                                                                                                          
-color_y <- "#ff6600"                                                                                                                          
-if (!decimal_separator_period) { # for stat_regline_equation and stat_cor                                                                                                           # 8
-  options(OutDec = ".")                                                                                                                                                             # 9
-}                                                                                                                                                                                  # 10
-ggplot(
-  data = data_frame_of_mass_time_with_torque,
-  mapping = aes(x = `$\\frac{\\omega}{\\unit{\\per\\s\\squared}}$`, y = `$\\frac{T}{\\unit{\\N\\m}}$`)
-) +
-  geom_point(shape = 23, size = 1) +
-  labs(x = TeX("$\\frac{\\textit{\\omega}}{\\frac{1}{s^2}}$"), y = TeX("$\\frac{\\textit{T}}{N m}$")) +
-  theme(
-    axis.title.x = element_text(colour = color_x),
-    axis.text.x = element_text(colour = color_x),
-    axis.ticks.x = element_line(colour = color_x),
-    axis.title.y = element_text(colour = color_y),
-    axis.text.y = element_text(colour = color_y),
-    axis.ticks.y = element_line(colour = color_y)
-  ) +
- stat_poly_line() +
- #  stat_poly_eq(use_label(c("eq", "R2")))+
-  stat_regline_equation(mapping = aes(x = `$\\frac{\\omega}{\\unit{\\per\\s\\squared}}$`, y = `$\\frac{T}{\\unit{\\N\\m}}$`, label = paste(..eq.label.., ..rr.label.., ..adj.rr.label.., sep = "~~~~")), color = "#ff6600", label.y = .004) +  # 14
-  stat_cor(aes(x = `$\\frac{\\omega}{\\unit{\\per\\s\\squared}}$`, y = `$\\frac{T}{\\unit{\\N\\m}}$`), color = "#ff6600", label.y = .0035)                                                                                                    # 15
+mean_t_by_distance <- rowMeans(data_frame_of_mass_time_by_distance[, c(2:4)])
+data_frame_of_mass_time_by_distance_with_mean_t <- cbind(data_frame_of_mass_time_by_distance, mean_t_by_distance)
+angular_acceleration_by_distance <- 2 * h / (r * mean_t_by_distance^2)
+data_frame_of_mass_time_by_distance_with_angular_acceleration <- cbind(data_frame_of_mass_time_by_distance_with_mean_t, angular_acceleration_by_distance)
+torque_by_distance <- m_prime[length(m_prime)] * r * (g_Tallinn - r * angular_acceleration_by_distance)
+data_frame_of_mass_time_by_distance_with_torque <- cbind(data_frame_of_mass_time_by_distance_with_angular_acceleration, torque_by_distance)
+moment_of_inertia <- torque_by_distance / angular_acceleration_by_distance
+data_frame_of_mass_time_by_distance_with_moment_of_inertia <- cbind(data_frame_of_mass_time_by_distance_with_torque, moment_of_inertia)
 
-if (!decimal_separator_period) {  # 1
-  options(OutDec = ",")           # 2
-}                                 # 3
-formula_1 = torque ~ angular_acceleration
-model_1 = lm(formula = formula_1, data = data_frame_of_mass_time_with_torque)
-emf_1 <- model_1$coefficients[1]
-r_1 <- -model_1$coefficients[2]
+colnames(data_frame_of_mass_time_by_distance_with_moment_of_inertia) <- c(
+  "Katse nr",
+  "$\\frac{R}{\\unit{\\m}}$",
+  "$\\frac{t_1}{\\unit{\\s}}$",
+  "$\\frac{t_2}{\\unit{\\s}}$",
+  "$\\frac{t_3}{\\unit{\\s}}$",
+  "$\\frac{\\overline{t}}{\\unit{\\s}}$",
+  "$\\frac{\\omega}{\\unit{\\per\\s\\squared}}$",
+  "$\\frac{T}{\\unit{\\N\\m}}$",
+  "$\\frac{I}{\\unit{\\kg\\m\\squared}}$"
+)
 
-print(emf_1)
-print(r_1)
+print_table(
+  table = data_frame_of_mass_time_by_distance_with_moment_of_inertia,
+  caption = "Nurkkiirenduse ja jõumomendi sõltuvus muhvide kaugusest.",
+  digits = 5,
+  additional_header = c(" " = 2, "Keha langemise aeg" = 4, " " = 3)
+)
 
 ```
 

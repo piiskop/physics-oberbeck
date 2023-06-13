@@ -1,3 +1,5 @@
+\onecolumn
+
 # Teooria
 
 Oberbecki pendel on agregaat, mis koosneb kahest rattast, nendele kinnitatud raskustest, niidist ning fotoväravate ja rattaga postist. Ühe ratta ümber saab keerata niidi, mille teise otsa kinnitatakse raskus, mis riputatakse ülemise fotovärava kohal olevast rattast üle, nii et see saaks vabalt langeda läbi kummagi fotovärava kerides niiti ratta ümbert vähemaks. Raskused ratta küljes tasakaalustavad ratast.
@@ -72,3 +74,24 @@ T = r \cdot m_\text{hanging body} \cdot (g - r \cdot \alpha).
 \end{align}
 
 ```
+
+Kogu hoorattale mõjuv jõumoment koosneb hoorattale mõjuvast netojõumomendist, millest on eemaldatud hõõrdejõu moment. Kogu hoorattale mõjuv jõumoment on väljendatav inertsimomendi ja nurkkiirenduse kaudu valemi \@ref(eq:torque-by-moment-of-inertia) leheküljel `r render_pageref(reference = "eq:torque-by-moment-of-inertia")` kaudu. Kui nüüd avaldada netojõumoment, on saadud lineaarse seose võrrand, milles inertsimoment on sõltumatu muutuja ja hõõrdejõu moment algjõumoment. See netojõumomendi avalduskäik on esitatud seostena \@ref(eq:net-torque-on-wheel) leheküljel `r render_pageref(reference = "eq:net-torque-on-wheel")` [@giancoli_2014_physics(lk 211)].
+
+```{=tex}
+\begin{align}
+\vec{T_\text{total}} = &\vec{T} - \vec{T_\text{fr}},\\
+\vec{T} = &\vec{T_\text{total}} + \vec{T_\text{fr}} = \vec{I} \times \vec{\alpha} + \vec{T_\text{fr}},
+(\#eq:net-torque-on-wheel)
+\end{align}
+
+```
+
+milles
+
+$\vec{T_\text{total}}$
+: kogu jõumoment
+
+$\vec{T_\text{fr}}$
+: hõõrdejõu moment
+
+\twocolumn

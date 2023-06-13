@@ -1,0 +1,22 @@
+# Vastused küsimustele
+
+## Pöördliikumise dünaamika põhivõrrandi kehtivus
+
+### Küsimus
+
+Kas teie poolt läbi viidud katse kinnitab pöördliikumise dünaamika põhivõrrandi kehtivust?
+Põhjendage.
+
+### Vastus
+
+Pöördliikumise põhivõrrand on esitatud valemina \@ref(eq:torque-by-moment-of-inertia) leheküljel `r render_pageref(reference = "eq:torque-by-moment-of-inertia")`, mis tähendab, et mida suurem on inertsimoment, seda suurem on jõumoment ja mida suurem on nurkkiirendus, seda suurem on jõumoment. Vastavalt tabelile \@ref(tab:angular-acceleration-moment-of-inertia-by-time-of-falling) leheküljel `r render_pageref(reference = "tab:angular-acceleration-moment-of-inertia-by-time-of-falling")`, millesse on märgitud nurkkiirendus ja jõumoment muutumatu inertsimomendi korral, mida suurem on nurkkiirendus, seda suurem on jõumoment. Vastavalt tabelile \@ref(tab:angular-acceleration-moment-of-inertia-by-distance) leheküljel `r render_pageref(reference = "tab:angular-acceleration-moment-of-inertia-by-distance")` oli jõumoment seda suurem, mida suurem oli inertsimoment. Seega kinnitab minu poolt läbi viidud katse pöördliikumise dünaamika põhivõrrandi kehtivust.
+
+## Katsetulemusi mõjutanud faktorid
+
+### Küsimus
+
+Millised faktorid võisid kõige enam mõjutada katsetulemusi?
+
+### Vastus
+
+Kuna katsetulemused sõltuvad mitmest sisendist, siis mõõtmised iga sisendi puhul mõjutavad katsetulemusi. Kõige enam mõjutas minu katsetulemusi see, et ma järgisin tähelepanelikult juhendit.

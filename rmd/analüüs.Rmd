@@ -1,0 +1,64 @@
+\onecolumn
+
+# Andmeanalüüs
+
+Jõumomendi sõltuvus nurkkiirendusest on graafiliselt esitatud joonisel \@ref(fig:torque-vs-angular-speed) leheküljel `r render_pageref(reference = "fig:torque-vs-angular-speed")`.
+
+```{r label = "torque-vs-angular-speed", fig.cap = "Jõumomendi sõltuvus nurkkiirendusest."}
+librarian::shelf(c(
+  "ggplot2",
+  "ggpmisc",
+  "ggpubr",
+  "latex2exp"
+))
+
+color_x <- "#008000"                                                                                                                          
+color_y <- "#ff6600"                                                                                                                          
+if (!decimal_separator_period) { # for stat_regline_equation and stat_cor                                                                                                           # 8
+  options(OutDec = ".")                                                                                                                                                             # 9
+}                                                                                                                                                                                  # 10
+ggplot(
+  data = data_frame_of_mass_time_with_torque,
+  mapping = aes(x = `$\\frac{\\omega}{\\unit{\\per\\s\\squared}}$`, y = `$\\frac{T}{\\unit{\\N\\m}}$`)
+) +
+  geom_point(shape = 23, size = 1) +
+  labs(x = TeX("$\\frac{\\textit{\\omega}}{\\frac{1}{s^2}}$"), y = TeX("$\\frac{\\textit{T}}{N m}$")) +
+  theme(
+    axis.title.x = element_text(colour = color_x),
+    axis.text.x = element_text(colour = color_x),
+    axis.ticks.x = element_line(colour = color_x),
+    axis.title.y = element_text(colour = color_y),
+    axis.text.y = element_text(colour = color_y),
+    axis.ticks.y = element_line(colour = color_y)
+  ) +
+ stat_poly_line() +
+  stat_regline_equation(mapping = aes(x = `$\\frac{\\omega}{\\unit{\\per\\s\\squared}}$`, y = `$\\frac{T}{\\unit{\\N\\m}}$`, label = paste(after_stat(eq.label), ..rr.label.., ..adj.rr.label.., sep = "~~~~")), color = "#ff6600", label.y = .004) +  # 14
+  stat_cor(aes(x = `$\\frac{\\omega}{\\unit{\\per\\s\\squared}}$`, y = `$\\frac{T}{\\unit{\\N\\m}}$`), color = "#ff6600", label.y = .0035)                                                                                                    # 15
+
+if (!decimal_separator_period) {  # 1
+  options(OutDec = ",")           # 2
+}                                 # 3
+
+formula = torque ~ angular_acceleration
+model = lm(formula = formula, data = data_frame_of_mass_time_with_torque)
+
+b <- model$coefficients[1]
+k <- model$coefficients[2]
+
+R <- cor(
+  data_frame_of_mass_time_with_torque$`$\\frac{\\omega}{\\unit{\\per\\s\\squared}}$`,
+  data_frame_of_mass_time_with_torque$`$\\frac{T}{\\unit{\\N\\m}}$`,
+  method = 'pearson'
+)
+
+```
+
+Regressioonisirge tõus on \qty{`r as.character(signif(x = k, digits = 3))`}{\kg\m\squared} ja see näitab inertsimomenti. Vabaliige on \qty{`r as.character(signif(x = b, digits = 3))`}{\N\m} ja see näitab hõõrdejõu momenti. Pearsoni korrelatsioonikordaja on \num{`r as.character(signif(x = R, digits = 3))`}.
+
+```{r label = "I"}
+I_min <- min(moment_of_inertia)
+I_max <- max(moment_of_inertia)
+
+```
+
+Väikseim inertsimoment oli \qty{`r as.character(signif(x = I_min, digits = 3))`}{\kg\m\squared} ja suurim inertsimoment oli \qty{`r as.character(signif(x = I_max, digits = 3))`}{\kg\m\squared}. Muhvide kauguse suurenedes hooratta inertsimoment suurenes.
