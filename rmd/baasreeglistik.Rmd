@@ -432,6 +432,8 @@ Avaldan avaldisest \@ref(eq:planck-constant) leheküljel `r render_pageref(refer
 
 ## Impulss
 
+### Lineaarne impulss
+
 impulss
 : [massi](#mass) ja [kiiruse](#speed) korrutis[@haynes_2014_crc(lk 2-59)] (avaldis \@ref(eq:momentum) leheküljel `r render_pageref(reference = "eq:momentum")`)
 
@@ -453,6 +455,29 @@ Dimensioonanalüüs impulsi valemile on esitatud avaldisena \@ref(eq:dimensional
 
 ```
 
+### Impulsimoment
+
+osakese nurkimpulss punkti ümber
+: sellest punktist osakese raadiusvektori ja osakese impulsi vektorkorrutis (avaldis \@ref(eq:angular-momentum) leheküljel `r render_pageref(reference = "eq:angular-momentum")`) [@haynes_2014_crc(lk 2-45)]
+
+```{=tex}
+\begin{align}
+\vec{L} = \vec{r} \times \vec{p}.
+(\#eq:angular-momentum)
+\end{align}
+
+```
+
+Dimensioonanalüüs impulsimomendi valemile on esitatud avaldisena \@ref(eq:dimensional-analysis-of-angular-momentum) leheküljel `r render_pageref(reference = "eq:dimensional-analysis-of-angular-momentum")` ja sellest johtuvalt on ühik \unit{\kg\m\squared\per\s}.
+
+```{=tex}
+\begin{align}
+\mathrm{M \times \frac{L}{T} \times L = \frac{L^2 \times M}{T}}.
+(\#eq:dimensional-analysis-of-angular-momentum)
+\end{align}
+
+```
+
 ## Inertsimoment
 
 keha inertsimoment telje suhtes
@@ -468,6 +493,22 @@ I = \sum{m \times r^2}.
 
 ```
 
+```{r label = "calculate_I"}
+
+#' This function calculates the moment of inertia.
+#' 
+#' @param m the masses of particles
+#' @param r the distances of particles from the axis
+#' 
+#' @returns the moment of inertia
+calculate_I <- function(m, r) {
+  I <- sum(m * r^2)
+  
+  return(I)
+}
+
+```
+
 Dimensioonanalüüs inertsimomendi valemile on esitatud avaldisena \@ref(eq:dimensional-analysis-of-moment-of-inertia) leheküljel `r render_pageref(reference = "eq:dimensional-analysis-of-moment-of-inertia")` ja sellest johtuvalt on ühik \unit{\kg\m\squared}.
 
 ```{=tex}
@@ -478,13 +519,103 @@ Dimensioonanalüüs inertsimomendi valemile on esitatud avaldisena \@ref(eq:dime
 
 ```
 
+Inertsimomendi saab avaldada impulsimomendi ja nurkkiiruse kaudu. Selleks asendan massi impulsi valemist \@ref(eq:momentum) leheküljel `r render_pageref(reference = "eq:momentum")`, tangentsiaalkiiruse nurkkiiruse valemist \@ref(eq:angular-velocity-by-tangential-velocity) leheküljel `r render_pageref(reference = "eq:angular-velocity-by-tangential-velocity")` inertsimomendi põhivalemisse ja impulsi impulsimomendi valemist \@ref(eq:angular-momentum) leheküljel `r render_pageref(reference = "eq:angular-momentum")` inertsimomendi põhivalemisse \@ref(eq:moment-of-inertia) leheküljel `r render_pageref(reference = "eq:moment-of-inertia")`, et saada avaldis \@ref(eq:moment-of-inertia-by-angular-moment) leheküljel `r render_pageref(reference = "eq:moment-of-inertia-by-angular-moment")`.
+
+```{=tex}
+\begin{align}
+I = \sum{\frac{\vec{p_i}}{\vec{v_i}} \times r_i^2} = \sum{\frac{\vec{p}}{\vec{\omega \times r}} \times r^2} \\ = \sum{\frac{\vec{\frac{\vec{L}}{\vec{r}}}}{\vec{\omega \times r}} \times r^2} = \frac{\sum{\vec{L}}}{\vec{\omega}}.
+(\#eq:moment-of-inertia-by-angular-moment)
+\end{align}
+
+```
+
+\onecolumn
+## Kolme vektori ristkorrutis
+
+Avaldistena \@ref(eq:triple-vector-product) leheküljel `r render_pageref(reference = "eq:triple-vector-product")` ja \@ref(eq:triple-vector-product-continued) leheküljel `r render_pageref(reference = "eq:triple-vector-product-continued")` on esitatud kolme vektori ristkorrutis[@haynes_2014_crc(lk A-7)] [@vector] [@vector_khan_academy].
+
+\begin{landscape}
+
+\begin{align}
+\vec{V_1} \times (\vec{V_2} \times \vec{V_3}) = \vec{V_1} \times
+\begin{vmatrix}
+\vec{i}&\vec{j}&\vec{k}\\
+V_{2; x}&V_{2; y}&V_{2; z}\\
+V_{3; x}&V_{3; y}&V_{3; z}
+\end{vmatrix}
+= \vec{V_1} \times (\vec{i} \cdot
+\begin{vmatrix}
+V_{2; y}&V_{2; z}\\
+V_{3; y}&V_{3; z}
+\end{vmatrix}
+- \vec{j} \cdot
+\begin{vmatrix}
+V_{2; x}&V_{2; z}\\
+V_{3; x}&V_{3; z}
+\end{vmatrix}
++ \vec{k} \cdot
+\begin{vmatrix}
+V_{2; x}&V_{2; y}\\
+V_{3; x}&V_{3; y}
+\end{vmatrix}
+)\\
+= \vec{V_1} \times (\vec{i} \cdot (V_{2; y} \cdot V_{3; z} - V_{2; z} \cdot V_{3; y}) - \vec{j} \cdot (V_{2; x} \cdot V_{3; z} - V_{2; z} \cdot V_{3; x}) + \vec{k} \cdot (V_{2; x} \cdot V_{3; y} - V_{2; y} \cdot V_{3; x}))\\
+=
+\begin{vmatrix}
+\vec{i}&\vec{j}&\vec{k}\\
+V_{1; x}&V_{1; y}&V_{1; z}\\
+V_{2; y} \cdot V_{3; z} - V_{2; z} \cdot V_{3; y} & V_{2; z} \cdot V_{3; x} - V_{2; x} \cdot V_{3; z} & V_{2; x} \cdot V_{3; y} - V_{2; y} \cdot V_{3; x}
+\end{vmatrix}\\
+= \vec{i} \cdot
+\begin{vmatrix}
+V_{1; y}&V_{1; z}\\
+V_{2; z} \cdot V_{3; x} - V_{2; x} \cdot V_{3; z} & V_{2; x} \cdot V_{3; y} - V_{2; y} \cdot V_{3; x}
+\end{vmatrix}
+- \vec{j} \cdot
+\begin{vmatrix}
+V_{1; x}&V_{1; z}\\
+V_{2; y} \cdot V_{3; z} - V_{2; z} \cdot V_{3; y} & V_{2; x} \cdot V_{3; y} - V_{2; y} \cdot V_{3; x}
+\end{vmatrix}\\
++ \vec{k} \cdot
+\begin{vmatrix}
+V_{1; x}&V_{1; y}\\
+V_{2; y} \cdot V_{3; z} - V_{2; z} \cdot V_{3; y} & V_{2; z} \cdot V_{3; x} - V_{2; x} \cdot V_{3; z}
+\end{vmatrix}\\
+= \vec{i} \cdot (V_{1; y} \cdot (V_{2; x} \cdot V_{3; y} - V_{2; y} \cdot V_{3; x}) - V_{1; z} \cdot (V_{2; z} \cdot V_{3; x} - V_{2; x} \cdot V_{3; z}))\\
+- \vec{j} \cdot (V_{1; x} \cdot (V_{2; x} \cdot V_{3; y} - V_{2; y} \cdot V_{3; x}) - V_{1; z} \cdot (V_{2; y} \cdot V_{3; z} - V_{2; z} \cdot V_{3; y}))\\
++ \vec{k} \cdot (V_{1; x} \cdot (V_{2; z} \cdot V_{3; x} - V_{2; x} \cdot V_{3; z}) - V_{1; y} \cdot (V_{2; y} \cdot V_{3; z} - V_{2; z} \cdot V_{3; y})).
+(\#eq:triple-vector-product)
+\end{align}
+
+\begin{align}
+\vec{V_1} \times (\vec{V_2} \times \vec{V_3})\\
+= \vec{i} \cdot (V_{1; y} \cdot V_{2; x} \cdot V_{3; y} - V_{1; y} \cdot V_{2; y} \cdot V_{3; x} - V_{1; z} \cdot V_{2; z} \cdot V_{3; x} + V_{1; z} \cdot V_{2; x} \cdot V_{3; z} + V_{1; x} \cdot V_{2; x} \cdot V_{3; x} - V_{1; x} \cdot V_{2; x} \cdot V_{3; x})\\
+- \vec{j} \cdot (V_{1; x} \cdot V_{2; x} \cdot V_{3; y} - V_{1; x} \cdot V_{2; y} \cdot V_{3; x} - V_{1; z} \cdot V_{2; y} \cdot V_{3; z} + V_{1; z} \cdot V_{2; z} \cdot V_{3; y} + V_{1; y} \cdot V_{2; y} \cdot V_{3; y} - V_{1; y} \cdot V_{2; y} \cdot V_{3; y})\\
++ \vec{k} \cdot (V_{1; x} \cdot V_{2; z} \cdot V_{3; x} - V_{1; x} \cdot V_{2; x} \cdot V_{3; z}- V_{1; y} \cdot V_{2; y} \cdot V_{3; z} + V_{1; y} \cdot V_{2; z} \cdot V_{3; y} + V_{1; z} \cdot V_{2; z} \cdot V_{3; z} - V_{1; z} \cdot V_{2; z} \cdot V_{3; z})\\
+= \vec{i} \cdot (V_{2; x} \cdot (V_{1; y} \cdot V_{3; y} + V_{1; z} \cdot V_{3; z} + V_{1; x} \cdot V_{3; x}) - V_{3; x} \cdot (V_{1; y} \cdot V_{2; y} + V_{1; z} \cdot V_{2; z} + V_{1; x} \cdot V_{2; x}))\\
+- \vec{j} \cdot (-V_{2; y} \cdot (V_{1; x} \cdot V_{3; x} + V_{1; z} \cdot V_{3; z} + V_{1; y} \cdot V_{3; y}) + V_{3; y} \cdot (V_{1; x} \cdot V_{2; x} + V_{1; z} \cdot V_{2; z} + V_{1; y} \cdot V_{2; y})) \\
++\vec{k} \cdot (V_{2; z} \cdot (V_{1; x} \cdot V_{3; x} + V_{1; y} \cdot V_{3; y}+ V_{1; z} \cdot V_{3; z}) + -V_{3; z} \cdot (V_{1; x} \cdot V_{2; x} + V_{1; y} \cdot V_{2; y} + V_{1; z} \cdot V_{2; z}))\\
+= \vec{i} \cdot (V_{2; x} \cdot (\vec{V_1} \cdot \vec{V_3}) - V_{3; x} \cdot (\vec{V_1} \cdot \vec{V_2}))
+- \vec{j} \cdot (-V_{2; y} \cdot (\vec{V_1} \cdot \vec{V_3})+ V_{3; y} \cdot (\vec{V_1} \cdot \vec{V_2}))
++ \vec{k} \cdot (V_{2; z} \cdot (\vec{V_1} \cdot \vec{V_3})-V_{3; z} \cdot (\vec{V_1} \cdot \vec{V_2}))\\
+=(\vec{V_1} \cdot \vec{V_3}) \cdot (V_{2; x} \cdot \vec{i} + V_{2; y} \cdot \vec{j} + V_{2; z} \cdot \vec{k})
+- (\vec{V_1} \cdot \vec{V_2}) \cdot (V_{3; x} \cdot \vec{i} + V_{3; y} \cdot \vec{j} + V_{3; z} \cdot \vec{k})\\
+=(\vec{V_1} \cdot \vec{V_3}) \cdot \vec{V_2} - (\vec{V_1} \cdot \vec{V_2}) \cdot \vec{V_3}.
+(\#eq:triple-vector-product-continued)
+\end{align}
+
+\end{landscape}
+\twocolumn
+
 ## Jõud
+
+### Lineaarne jõud
 
 Jõud on [impulsi](#momentum) muut ajas (avaldis \@ref(eq:force) leheküljel `r render_pageref(reference = "eq:force")`).
 
 ```{=tex}
 \begin{align}
-\vec{F} = \frac{\mathrm{d}(\vec{p})}{\mathrm{d}(t)} = m frac{\cdot \mathrm{d}(\vec{v})}{\mathrm{d}(t)} = m \cdot \vec{a},
+\vec{F} = \frac{\mathrm{d}(\vec{p})}{\mathrm{d}(t)} = m \cdot \frac{\mathrm{d}(\vec{v})}{\mathrm{d}(t)} = m \cdot \vec{a},
 (\#eq:force)
 \end{align}
 
@@ -499,7 +630,7 @@ kus *m* on mass ja $\vec{a}$ on kiirenduse vektor [@haynes_2014_crc(lk 2-2)]. Im
 \end{align}
 ```
 
-## Jõumoment
+### Jõumoment
 
 Jõumomendi valem on \@ref(eq:torque) leheküljel `r render_pageref(reference = "eq:torque")`[@haynes_2014_crc(lk 2-2)].
 
@@ -529,14 +660,26 @@ Dimensionaalanalüüs on esitatud avaldisena \@ref(eq:dimensional-analysis-of-to
 
 ```
 
-Et väljendada jõumoment inertsimomendi ja nurkkiirenduse kaudu, asendan jõumomendi põhivalemisse \@ref(eq:torque) leheküljel `r render_pageref(reference = "eq:torque")` pöördkehale mõjuva jõu valemist \@ref(eq:force) leheküljel `r render_pageref(reference = "eq:force")`, seejärel tangentsiaalkiirenduse nurkkiirenduse valemist \@ref(eq:angular-acceleration-by-tangential-velocity) leheküljel `r render_pageref(reference = "eq:angular-acceleration-by-tangential-velocity")` ja lõpuks inertsimomendi valemist \@ref(eq:moment-of-inertia) leheküljel `r render_pageref(reference = "eq:moment-of-inertia")`, et saada valem \@ref(eq:torque-by-moment-of-inertia) leheküljel `r render_pageref(reference = "eq:torque-by-moment-of-inertia")`.
+Et väljendada jõumoment inertsimomendi ja nurkkiirenduse kaudu, asendan jõumomendi põhivalemisse \@ref(eq:torque) leheküljel `r render_pageref(reference = "eq:torque")` pöördkehale mõjuva jõu valemist \@ref(eq:force) leheküljel `r render_pageref(reference = "eq:force")`, seejärel tangentsiaalkiirenduse nurkkiirenduse valemist \@ref(eq:angular-acceleration-by-tangential-velocity) leheküljel `r render_pageref(reference = "eq:angular-acceleration-by-tangential-velocity")` ja lõpuks inertsimomendi valemist \@ref(eq:moment-of-inertia) leheküljel `r render_pageref(reference = "eq:moment-of-inertia")`, et saada valem \@ref(eq:torque-by-moment-of-inertia) leheküljel `r render_pageref(reference = "eq:torque-by-moment-of-inertia")`[@wikipediacontributors_2018_moment]. Kolme vektori ristkorrutise teostamiseks kasutasin valemit \@ref(eq:triple-vector-product-continued) leheküljel `r render_pageref(reference = "eq:triple-vector-product-continued")`.
 
 ```{=tex}
 \begin{align}
-\vec{T} = \vec{r} \times \vec{m \cdot \vec{a}} = m \cdot \vec{a} \times \vec{r} = \\
-m \cdot \vec{r \cdot \vec{\alpha}} \times \vec{r} = m \cdot r \cdot \vec{r} \times \vec{\alpha} =\\
-m \cdot \vec{r^2} \times \vec{\alpha} = \vec{I} \times \vec{\alpha}.
+\vec{T} = \vec{r} \times \vec{m \cdot \vec{a}} = m \cdot \vec{r} \times \vec{a} = \\
+m \cdot \vec{r} \times \vec{\vec{r} \times \vec{\alpha}}\\
+= m \cdot ((\vec{r} \cdot \vec{r}) \cdot \vec{\alpha} - (\vec{\alpha} \cdot \vec{r}) \cdot \vec{r}) =\\
+m \times r^2 \times \vec{\alpha}\\
+= I \cdot \vec{\alpha}.
 (\#eq:torque-by-moment-of-inertia)
+\end{align}
+
+```
+
+Et väljendada jõumoment impulsimomendi kaudu, asendan jõumomendi avaldamise valemisse inertsimomendi ja nurkkiirenduse kaudu \@ref(eq:torque-by-moment-of-inertia) leheküljel `r render_pageref(reference = "eq:torque-by-moment-of-inertia")` esmalt inertsimomendi viimase avaldaldamise valemist impulsimomendi ja nurkkiiruse kaudu \@ref(eq:moment-of-inertia-by-angular-moment) leheküljel `r render_pageref(reference = "eq:moment-of-inertia-by-angular-moment")` ja seejärel nurkkiirenduse viimase põhivalemist \@ref(eq:angular-acceleration) leheküljel `r render_pageref(reference = "eq:angular-acceleration")`, et saada avaldis \@ref(eq:torque-by-angular-velocity) leheküljel `r render_pageref(reference = "eq:torque-by-angular-velocity")`.
+
+```{=tex}
+\begin{align}
+\vec{T} = \frac{\mathrm{d}(\vec{L})}{\mathrm{d}(\vec{\omega})} \times \vec{\frac{\mathrm{d}(\omega)}{\mathrm{d}(t)}} = \frac{\mathrm{d}({\vec{L}})}{\mathrm{d}(t)}.
+(\#eq:torque-by-angular-velocity)
 \end{align}
 
 ```

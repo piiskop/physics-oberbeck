@@ -80,7 +80,7 @@ Kogu hoorattale mõjuv jõumoment koosneb hoorattale mõjuvast netojõumomendist
 ```{=tex}
 \begin{align}
 \vec{T_\text{total}} = &\vec{T} - \vec{T_\text{fr}},\\
-\vec{T} = &\vec{T_\text{total}} + \vec{T_\text{fr}} = \vec{I} \times \vec{\alpha} + \vec{T_\text{fr}},
+\vec{T} = &\vec{T_\text{total}} + \vec{T_\text{fr}} = I \times \vec{\alpha} + \vec{T_\text{fr}},
 (\#eq:net-torque-on-wheel)
 \end{align}
 

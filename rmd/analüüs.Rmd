@@ -19,10 +19,10 @@ if (!decimal_separator_period) { # for stat_regline_equation and stat_cor       
 }                                                                                                                                                                                  # 10
 ggplot(
   data = data_frame_of_mass_time_with_torque,
-  mapping = aes(x = `$\\frac{\\omega}{\\unit{\\per\\s\\squared}}$`, y = `$\\frac{T}{\\unit{\\N\\m}}$`)
+  mapping = aes(x = `$\\frac{\\alpha}{\\unit{\\per\\s\\squared}}$`, y = `$\\frac{T}{\\unit{\\N\\m}}$`)
 ) +
   geom_point(shape = 23, size = 1) +
-  labs(x = TeX("$\\frac{\\textit{\\omega}}{\\frac{1}{s^2}}$"), y = TeX("$\\frac{\\textit{T}}{N m}$")) +
+  labs(x = TeX("$\\frac{\\textit{\\alpha}}{\\frac{1}{s^2}}$"), y = TeX("$\\frac{\\textit{T}}{N m}$")) +
   theme(
     axis.title.x = element_text(colour = color_x),
     axis.text.x = element_text(colour = color_x),
@@ -32,8 +32,8 @@ ggplot(
     axis.ticks.y = element_line(colour = color_y)
   ) +
  stat_poly_line() +
-  stat_regline_equation(mapping = aes(x = `$\\frac{\\omega}{\\unit{\\per\\s\\squared}}$`, y = `$\\frac{T}{\\unit{\\N\\m}}$`, label = paste(after_stat(eq.label), ..rr.label.., ..adj.rr.label.., sep = "~~~~")), color = "#ff6600", label.y = .004) +  # 14
-  stat_cor(aes(x = `$\\frac{\\omega}{\\unit{\\per\\s\\squared}}$`, y = `$\\frac{T}{\\unit{\\N\\m}}$`), color = "#ff6600", label.y = .0035)                                                                                                    # 15
+  stat_regline_equation(mapping = aes(x = `$\\frac{\\alpha}{\\unit{\\per\\s\\squared}}$`, y = `$\\frac{T}{\\unit{\\N\\m}}$`, label = paste(after_stat(eq.label), ..rr.label.., ..adj.rr.label.., sep = "~~~~")), color = "#ff6600", label.y = .004) +  # 14
+  stat_cor(aes(x = `$\\frac{\\alpha}{\\unit{\\per\\s\\squared}}$`, y = `$\\frac{T}{\\unit{\\N\\m}}$`), color = "#ff6600", label.y = .0035)                                                                                                    # 15
 
 if (!decimal_separator_period) {  # 1
   options(OutDec = ",")           # 2
@@ -46,7 +46,7 @@ b <- model$coefficients[1]
 k <- model$coefficients[2]
 
 R <- cor(
-  data_frame_of_mass_time_with_torque$`$\\frac{\\omega}{\\unit{\\per\\s\\squared}}$`,
+  data_frame_of_mass_time_with_torque$`$\\frac{\\alpha}{\\unit{\\per\\s\\squared}}$`,
   data_frame_of_mass_time_with_torque$`$\\frac{T}{\\unit{\\N\\m}}$`,
   method = 'pearson'
 )
@@ -59,6 +59,13 @@ Regressioonisirge tõus on \qty{`r as.character(signif(x = k, digits = 3))`}{\kg
 I_min <- min(moment_of_inertia)
 I_max <- max(moment_of_inertia)
 
+m_balancer <- .192
+number_of_balancers <- 4
+I_min_by_masses <- calculate_I(m = rep(x = m_balancer, number_of_balancers), r = rep(R_min, number_of_balancers))
+I_max_by_masses <- calculate_I(m = rep(x = m_balancer, number_of_balancers), r = rep(R_max, number_of_balancers))
+print(I_min_by_masses)
+print(I_max_by_masses)
+
 ```
 
-Väikseim inertsimoment oli \qty{`r as.character(signif(x = I_min, digits = 3))`}{\kg\m\squared} ja suurim inertsimoment oli \qty{`r as.character(signif(x = I_max, digits = 3))`}{\kg\m\squared}. Muhvide kauguse suurenedes hooratta inertsimoment suurenes.
+Vastavalt pöördliikumise põhivõrrandile \@ref(eq:torque-by-moment-of-inertia) leheküljel `r render_pageref(reference = "eq:torque-by-moment-of-inertia")` oli väikseim inertsimoment \qty{`r as.character(signif(x = I_min, digits = 3))`}{\kg\m\squared} ja suurim inertsimoment \qty{`r as.character(signif(x = I_max, digits = 3))`}{\kg\m\squared}. Iga tasakaalustaja hoorattal kaalus \qty{`r as.character(m_balancer)`}{\kg}. Vastavalt inertsimomendi põhivalemile \@ref(eq:moment-of-inertia) leheküljel `r render_pageref(reference = "eq:moment-of-inertia")` oli väikseim inertsimoment \qty{`r as.character(signif(x = I_min_by_masses, digits = 2))`}{\kg\m\squared} ja suurim inertsimoment \qty{`r as.character(signif(x = I_max_by_masses, digits = 2))`}{\kg\m\squared}. Muhvide kauguse suurenedes hooratta inertsimoment suurenes. Märgatav erinevus intertsimomentide vahel, mis on arvutatud kahel moel, tuleneb sellest, et esmalt sai arvutus tehtud vastavalt summaarsetele suurustele ja teises juhus ainult osade komponentide kaudu. Teises juhus ei võetud arvesse hooratta kuju iseärasusi ega muude osade massi kui ainult muhvide masse. Sellest tulenevalt on esmase juhu tulemused tõepärasemad.
